@@ -4,7 +4,7 @@ import VerticalStepper from '../components/VerticalStepper'; // Import the Verti
 const Header = () => {
   return (
     <div>
-      <div>Header</div>
+      <div>RESUME BUILDER</div>
       <VerticalStepper /> {/* Include the VerticalStepper component */}
     </div>
   );
