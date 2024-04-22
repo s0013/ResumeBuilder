@@ -22,7 +22,7 @@ const PersonalDetailsPage = () => {
       reader.onload = (e) => {
         setFormData({
           ...formData,
-          [name]: e.target.result // base64-encoded image data
+          [name]: e.target.result 
         });
       };
       reader.readAsDataURL(files[0]);

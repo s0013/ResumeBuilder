@@ -59,27 +59,40 @@ const SubmissionDetailsPage = () => {
     }
   }, []);
 
-  // Function to generate and download the resume
-  const downloadResume = () => {
-    html2canvas(document.querySelector(".container")).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
+// Function to generate and download the resume
+const downloadResume = () => {
+  html2canvas(document.querySelector(".abc")).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
 
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: [canvas.width, canvas.height]
-      });
+    const increasedWidth = canvas.width; 
+    const increasedHeight = canvas.height * 1.1; 
 
-      pdf.addImage(imgData, 'PNG', 0, 0);
-
-      pdf.save('resume.pdf');
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'px',
+      format: [increasedWidth, increasedHeight] 
     });
-  };
+
+    const contentWidth = canvas.width;
+    const contentHeight = canvas.height;
+    
+    
+    const pdfX = 50; 
+    const pdfY = 50;
+    const imageWidth = contentWidth - (pdfX * 2); 
+    const imageHeight = contentHeight;
+
+    pdf.addImage(imgData, 'PNG', pdfX, pdfY, imageWidth, imageHeight);
+
+    pdf.save('resume.pdf');
+  });
+};
+
 
   return (
     <div className="container mt-5" style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
-    <div className="row">
-      <div className="col-md-4" style={{ backgroundColor: 'blue', color: 'white', padding: '20px', borderRadius: '10px' }}>
+    <div className="row abc">
+      <div className="col-md-4 " style={{ backgroundColor: 'blue', color: 'white', padding: '20px', borderRadius: '10px' }}>
         {/* Personal Details */}
         {personalDetails && (
           <div>
@@ -131,7 +144,7 @@ const SubmissionDetailsPage = () => {
           <div key={index}>
             <h5>Organization: {experience.organization}</h5>
             <p>Designation: {experience.designation}</p>
-            {/* Add more details about experience here */}
+           
           </div>
         ))}
 
@@ -161,7 +174,7 @@ const SubmissionDetailsPage = () => {
          
         </div>
       </div>
-      </div>
+      </div><br></br>
       <button className="btn btn-primary" onClick={downloadResume}>Download</button>
     </div>
   );

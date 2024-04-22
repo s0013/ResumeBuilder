@@ -1,11 +1,11 @@
 import React from 'react';
-import VerticalStepper from '../components/VerticalStepper'; // Import the VerticalStepper component
+import VerticalStepper from '../components/VerticalStepper'; 
 
 const Header = () => {
   return (
     <div>
       <div>RESUME BUILDER</div>
-      <VerticalStepper /> {/* Include the VerticalStepper component */}
+      <VerticalStepper /> 
     </div>
   );
 };
