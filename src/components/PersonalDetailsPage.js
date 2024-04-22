@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const PersonalDetailsPage = () => {
   const [formData, setFormData] = useState({
-    passportPhoto: '',
+    passportPhoto: '', // Empty string initially
     firstName: '',
     lastName: '',
     email: '',
@@ -15,11 +15,23 @@ const PersonalDetailsPage = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    const { name, value, files } = e.target;
+    
+    if (files && files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setFormData({
+          ...formData,
+          [name]: e.target.result // base64-encoded image data
+        });
+      };
+      reader.readAsDataURL(files[0]);
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = (e) => {

@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Header from "./components/Header"; // Assuming Header component exists
 
 
+
 function App() {
   return (
     <Router>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/header" element={<Header />} />
       </Routes>
     </Router>
+   
   );
 }
 
