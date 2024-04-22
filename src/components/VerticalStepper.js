@@ -4,6 +4,7 @@ import EducationDetails from '../components/EducationDetailsPage';
 import ProjectDetails from '../components/ProjectDetailsPage';
 import ExperienceDetails from '../components/ExperienceDetailsPage';
 import ExtraDetails from '../components/ExtraDetailsPage';
+import SubmissionDetails from '../components/SubmissionDetailsPage'; // Import the SubmissionDetails component
 
 const VerticalStepper = () => {
   const [currentStep, setCurrentStep] = useState('personalDetails'); // Default to personalDetails
@@ -13,8 +14,7 @@ const VerticalStepper = () => {
   };
 
   const handleNext = () => {
-    // Define the sequence of sections
-    const sections = ['personalDetails', 'educationDetails', 'projectDetails', 'experienceDetails', 'extraDetails'];
+    const sections = ['personalDetails', 'educationDetails', 'projectDetails', 'experienceDetails', 'extraDetails', 'submissionDetails']; // Add submissionDetails to the sections
     const currentIndex = sections.indexOf(currentStep);
     if (currentIndex < sections.length - 1) {
       setCurrentStep(sections[currentIndex + 1]);
@@ -22,7 +22,7 @@ const VerticalStepper = () => {
   };
 
   const handlePrevious = () => {
-    const sections = ['personalDetails', 'educationDetails', 'projectDetails', 'experienceDetails', 'extraDetails'];
+    const sections = ['personalDetails', 'educationDetails', 'projectDetails', 'experienceDetails', 'extraDetails', 'submissionDetails']; // Add submissionDetails to the sections
     const currentIndex = sections.indexOf(currentStep);
     if (currentIndex > 0) {
       setCurrentStep(sections[currentIndex - 1]);
@@ -69,6 +69,13 @@ const VerticalStepper = () => {
             >
               Extra Details
             </a>
+            <a
+              href="#"
+              className={`list-group-item list-group-item-action ${currentStep === 'submissionDetails' ? 'active' : ''}`}
+              onClick={() => handleStepClick('submissionDetails')}
+            >
+              Submission Details 
+            </a>
           </div>
         </div>
         <div className="col-md-9">
@@ -79,13 +86,14 @@ const VerticalStepper = () => {
               {currentStep === 'projectDetails' && <ProjectDetails />}
               {currentStep === 'experienceDetails' && <ExperienceDetails />}
               {currentStep === 'extraDetails' && <ExtraDetails />}
+              {currentStep === 'submissionDetails' && <SubmissionDetails />} 
               <div className="mt-3">
                 {currentStep !== 'personalDetails' && (
                   <button className="btn btn-primary me-2" onClick={handlePrevious}>
                     Previous
                   </button>
                 )}
-                {currentStep !== 'extraDetails' && (
+                {currentStep !== 'submissionDetails' && ( // Check if it's not submissionDetails
                   <button className="btn btn-primary" onClick={handleNext}>
                     Next
                   </button>
